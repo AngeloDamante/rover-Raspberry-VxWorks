@@ -1,6 +1,7 @@
 #include "utils.h"
+#include <usrLib.h>
 
-/* msleep(): Sleep for the requested number of milliseconds. */
+/* msleep(): sleeps for the requested number of milliseconds. */
 int msleep(long ms) {
     struct timespec ts;
     int res;
@@ -18,4 +19,14 @@ int msleep(long ms) {
     } while (res && errno == EINTR);
 
     return res;
+}
+
+/* executionTime():  returns a random execution time between a min and a max*/
+long executionTime(long BCET, long WCET) {
+	return rand() % (WCET - BCET + 1) + BCET;
+}
+
+/* msToTick(): returns the number of ticks in a requested number of milliseconds */
+int msToTick(long ms) {
+	return (int) sysClkRateGet() * ((float) ms / 1000.0);
 }

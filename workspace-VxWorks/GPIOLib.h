@@ -1,5 +1,5 @@
-#ifndef __INCgpioLibH
-#define __INCgpioLibH
+#ifndef GPIOLIB_H
+#define GPIOLIB_H
 #include "vxWorks.h"
 #include "taskLib.h"
 #include "stdio.h"
@@ -25,4 +25,4 @@ extern int gpioGetVal(gpioSetType * gSet);
 extern int gpioSetDir(gpioSetType * gSet);
 extern int gpioGetDir(gpioSetType * gSet);
 
-#endif /* __INCgpioLibH */
+#endif /* GPIOLIB_H */

@@ -1,9 +1,13 @@
-#ifndef utilsH
-#define utilsH
+#ifndef UTILS_H
+#define UTILS_H
 #include "vxWorks.h"
 #include <time.h>
 #include <errno.h>    
 
 extern int msleep(long ms);
 
-#endif /* utilsH*/
+extern long executionTime(long BCET, long WCET);
+
+extern int msToTick(long ms);
+
+#endif /* UTILS_H*/

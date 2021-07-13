@@ -24,7 +24,6 @@
  * 
  * RETURNS: void
  * 
- * \NOMANUAL
  */
 int gpioSetVal(gpioSetType* gSet)
 {
@@ -39,7 +38,6 @@ int gpioSetVal(gpioSetType* gSet)
  * 
  * RETURNS: void
  * 
- * \NOMANUAL
  */
 int gpioGetVal(gpioSetType* gSet)
 {
@@ -55,7 +53,6 @@ int gpioGetVal(gpioSetType* gSet)
  * 
  * RETURNS: OK
  * 
- * \NOMANUAL
  */
 int gpioSetDir(gpioSetType* gSet)
 {
@@ -70,7 +67,6 @@ int gpioSetDir(gpioSetType* gSet)
  * 
  * RETURNS: direction of the pin 
  * 
- * \NOMANUAL
  */
 int gpioGetDir(gpioSetType * gSet)
 {
@@ -99,8 +95,6 @@ STATUS gpioGroup(void)
     printf( "GPIO syscall registration SUCCEEDED");
     return OK;
     }
-
-//TODO add latency for GPIO calls
 
 void registerGpioSyscalls(void) 
     {
