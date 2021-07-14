@@ -27,6 +27,11 @@ long executionTime(long BCET, long WCET) {
 }
 
 /* msToTick(): returns the number of ticks in a requested number of milliseconds */
-int msToTick(long ms) {
-	return (int) sysClkRateGet() * ((float) ms / 1000.0);
+long msToTick(long ms) {
+	return sysClkRateGet() * (ms / 1000);
+}
+
+/* intervalToMs(): returns the number of milliseconds from two timestamps */
+long intervalToMs(UINT32 start, UINT32 end){
+	return (long) (end-start) * 1000 / sysTimestampFreq();
 }
