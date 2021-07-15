@@ -16,7 +16,7 @@
 #define MOTORS 		25
 #define CAMERA 		8
 #define DRILL 		7
-#define ARM 		12
+#define ROB_ARM		12
 #define PRESS_SENS 	16
 #define TEMP_SENS 	20
 #define STORM_SENS 	21

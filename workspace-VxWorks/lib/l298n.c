@@ -57,17 +57,17 @@ void backward(){
     left_backward();
 }
 
-void rotate_left(){
+void left_rotate(){
     right_forward();
     left_backward();
 }
 
-void rotate_right(){
+void right_rotate(){
     right_backward();
     left_forward();
 }
 
-void stop(){
+void stop_vehicle(){
     right_braking();
     left_braking();
 }

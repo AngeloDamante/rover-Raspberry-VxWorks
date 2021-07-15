@@ -16,7 +16,7 @@ void left_braking();
 void forward();
 void backward();
 
-void rotate_left();
-void rotate_right();
+void left_rotate();
+void right_rotate();
 
-void stop();
+void stop_vehicle();
