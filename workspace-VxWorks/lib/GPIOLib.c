@@ -15,7 +15,7 @@
  * RETURNS: void
  * 
  */
-int gpioSetVal(gpioSetType* gSet)
+int gpioSetVal(gpioSetType *gSet)
 {
     return (vxbGpioSetValue(gSet->gpioNum, gSet->val));
 }
@@ -29,7 +29,7 @@ int gpioSetVal(gpioSetType* gSet)
  * RETURNS: void
  * 
  */
-int gpioGetVal(gpioSetType* gSet)
+int gpioGetVal(gpioSetType *gSet)
 {
     gSet->val = vxbGpioGetValue(gSet->gpioNum);
     return OK;
@@ -44,7 +44,7 @@ int gpioGetVal(gpioSetType* gSet)
  * RETURNS: OK
  * 
  */
-int gpioSetDir(gpioSetType* gSet)
+int gpioSetDir(gpioSetType *gSet)
 {
     return (vxbGpioSetDir(gSet->gpioNum, gSet->val));
 }
@@ -58,9 +58,23 @@ int gpioSetDir(gpioSetType* gSet)
  * RETURNS: direction of the pin 
  * 
  */
-int gpioGetDir(gpioSetType * gSet)
+int gpioGetDir(gpioSetType *gSet)
 {
     gSet->val = vxbGpioGetDir(gSet->gpioNum);
     return OK;
 }
 
+int gpioWrite(UINT32 gpioNum, UINT32 value)
+{
+    return (vxbGpioSetValue(gpioNum, value));
+}
+
+int gpioRead(UINT32 gpioNum)
+{
+    return vxbGpioGetValue(gpioNum);
+}
+
+int pinMode(UINT32 gpioNum, UINT32 value)
+{
+    return vxbGpioSetDir(gpioNum, value);
+}
