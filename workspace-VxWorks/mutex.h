@@ -1,6 +1,9 @@
 #ifndef MUTEX_H_
 #define MUTEX_H_
 
+#include "vxWorks.h"
+#include "usrLib.h"
+
 /* Mutex semaphore with ceiling*/
 struct mutex {
 	SEM_ID sem;
