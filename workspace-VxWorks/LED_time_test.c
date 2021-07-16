@@ -3,8 +3,8 @@
 #include "vxWorks.h"
 #include <stdio.h>
 #include <usrLib.h>
-#include "utils.h"
-#include "lib/gpioLib.h"
+#include "include/utils.h"
+#include "hwLib/gpioLib.h"
 
 #define NUM_TESTS 1000000
 #define PIN_LED 23

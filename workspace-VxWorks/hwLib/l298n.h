@@ -1,3 +1,6 @@
+#ifndef L298N_H
+#define L298N_H
+
 #include "pin.h"
 #include "gpioLib.h"
 
@@ -20,3 +23,5 @@ void left_rotate();
 void right_rotate();
 
 void stop_vehicle();
+
+#endif /* L298N_H */
