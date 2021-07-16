@@ -84,6 +84,9 @@ def main():
         with open(file) as f:
             traces = f.readlines()
 
+        # number of traces
+        print(f"Number of traces: {len(traces)}")
+
         # extract computation times
         C = extract_computation_times(traces)
 
