@@ -1,4 +1,4 @@
-#include "lib/GPIOLib.h"
+#include "lib/gpioLib.h"
 #include "lib/l298n.h"
 #include "utils.h"
 #include <unistd.h>

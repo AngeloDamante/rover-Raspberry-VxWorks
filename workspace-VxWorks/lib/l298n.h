@@ -1,5 +1,5 @@
 #include "pin.h"
-#include "GPIOLib.h"
+#include "gpioLib.h"
 
 void init_shield();
 

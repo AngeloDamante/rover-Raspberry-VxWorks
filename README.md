@@ -7,6 +7,11 @@ The workflow is as follows, from <b>TaskSet Idea</b> to <b>Hardware Implementati
     <img src="docs/Workflow.png" width=600 />
 </p>
 
+The development follows the following V-model,
+<p align=center>
+    <img src="docs/V-model-project.png" width=600 />
+</p>
+
 ## Authors
 - <a href="https://github.com/AngeloDamante"> Angelo D'Amante </a>
 - <a href="https://github.com/KevinMaggi"> Kevin Maggi </a>

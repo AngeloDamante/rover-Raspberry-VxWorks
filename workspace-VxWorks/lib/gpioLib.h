@@ -13,17 +13,6 @@
 #define HIGH 1
 #define LOW 0
 
-typedef struct gpioSetStruct
-{
-    UINT32 gpioNum;
-    UINT32 val;
-} gpioSetType;
-
-extern int gpioSetVal(gpioSetType *gSet);
-extern int gpioGetVal(gpioSetType *gSet);
-extern int gpioSetDir(gpioSetType *gSet);
-extern int gpioGetDir(gpioSetType *gSet);
-
 int gpioWrite(UINT32 gpioNum, UINT32 value);
 int gpioRead(UINT32 gpioNum);
 int pinMode(UINT32 gpioNum, UINT32 value);
