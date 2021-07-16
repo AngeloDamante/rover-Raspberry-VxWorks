@@ -7,27 +7,22 @@
 #include "lib/gpioLib.h"
 
 #define NUM_TESTS 1000000
+#define PIN_LED 23
 
 void start(void)
 {
 	UINT32 start = sysTimestampLock();
 
-	struct gpioSetStruct gpioPin;
-	gpioPin.gpioNum = 23;
-
 	/* Setting up pin */
-	gpioPin.val = PINMODE_OUT;
-	gpioSetDir(&gpioPin);
+	pinMode(PIN_LED, OUT);
 
 	for (int i = 0; i < NUM_TESTS; i++)
 	{
 		/* turning on pin */
-		gpioPin.val = OUTMODE_HIGH;
-		gpioSetVal(&gpioPin);
+		gpioWrite(PIN_LED, HIGH);
 
 		/* turning off pin */
-		gpioPin.val = OUTMODE_LOW;
-		gpioSetVal(&gpioPin);
+		gpioWrite(PIN_LED, LOW);
 	}
 
 	UINT32 end = sysTimestampLock();
