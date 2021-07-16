@@ -6,6 +6,21 @@
 #include <subsys/gpio/vxbGpioLib.h>
 #include "GPIOLib.h"
 
+int gpioWrite(UINT32 gpioNum, UINT32 value)
+{
+    return (vxbGpioSetValue(gpioNum, value));
+}
+
+int gpioRead(UINT32 gpioNum)
+{
+    return vxbGpioGetValue(gpioNum);
+}
+
+int pinMode(UINT32 gpioNum, UINT32 value)
+{
+    return vxbGpioSetDir(gpioNum, value);
+}
+
 /*******************************************************************************
  * 
  * gpioSetVal - Set the value of the specified pin
@@ -62,19 +77,4 @@ int gpioGetDir(gpioSetType *gSet)
 {
     gSet->val = vxbGpioGetDir(gSet->gpioNum);
     return OK;
-}
-
-int gpioWrite(UINT32 gpioNum, UINT32 value)
-{
-    return (vxbGpioSetValue(gpioNum, value));
-}
-
-int gpioRead(UINT32 gpioNum)
-{
-    return vxbGpioGetValue(gpioNum);
-}
-
-int pinMode(UINT32 gpioNum, UINT32 value)
-{
-    return vxbGpioSetDir(gpioNum, value);
 }

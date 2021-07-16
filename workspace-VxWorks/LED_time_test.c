@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <usrLib.h>
 #include "utils.h"
-#include "GPIOLib.h"
+#include "lib/GPIOLib.h"
 
 #define NUM_TESTS 1000000
 

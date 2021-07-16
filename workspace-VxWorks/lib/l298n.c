@@ -8,10 +8,10 @@ void init_shield(){
     pinMode(IN3, OUT);
     pinMode(IN4, OUT);
 
-    // right
+    // right side
     gpioWrite(ENA, HIGH);
 
-    // left
+    // left side
     gpioWrite(ENB, HIGH);
 }
 
@@ -46,7 +46,7 @@ void left_braking(){
     gpioWrite(IN4, LOW);
 }
 
-/* CAR */
+/* VEHICLE */
 void forward(){
     right_forward();
     left_forward();

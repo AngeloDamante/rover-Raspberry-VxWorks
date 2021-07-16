@@ -1,4 +1,4 @@
-#include "lib/gpioLib.h"
+#include "lib/GPIOLib.h"
 #include "lib/l298n.h"
 #include "utils.h"
 #include <unistd.h>
@@ -22,13 +22,5 @@ void test_motor()
 
 void start(void)
 {
-    // test_motor();
-    right_rotate();
-        msleep(450);
-
-        forward();
-        // msleep(300);
-        msleep(400);
-
-        stop_vehicle();
+    test_motor();
 }
