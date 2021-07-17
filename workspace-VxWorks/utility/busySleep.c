@@ -37,8 +37,10 @@ void getBusySleepParams(long long numCycles, int numSteps, int numExp) {
 
 void busySleep(int ms) {
 	// Paste here your busy sleep params
-	double a = 5.030389e-06;
-	double b = -3.864352e-01;
+	// double a = 5.030389e-06;
+	// double b = -3.864352e-01;
+	double a = 3.167546e-05;
+	double b = -5.655099e-01;
 	
     long long numCycles = (long long) ((ms - b) / a);
     int count = 0;

@@ -4,10 +4,10 @@
 
 void spawnSatelliteTask()
 {
-	cpuset_t affinity;
-	CPUSET_ZERO (affinity);
-	CPUSET_SET  (affinity, 1);
-	taskCpuAffinitySet(taskIdSelf(), affinity);
+    cpuset_t affinity;
+    CPUSET_ZERO(affinity);
+    CPUSET_SET(affinity, 1);
+    taskCpuAffinitySet(taskIdSelf(), affinity);
     taskSatellite = taskSpawn("Satellite", (int)P1, 0, 4000, (FUNCPTR)jobSatellite, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 }
 
@@ -32,7 +32,7 @@ void generatorMovementTask()
 
 void generatorPhotographTask()
 {
-	while (true)
+    while (true)
     {
         taskDelay(msToTick(T4));
         taskPhotograph = taskSpawn("Photograph", (int)P4, 0, 4000, (FUNCPTR)jobPhotograph, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);

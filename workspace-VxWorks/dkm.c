@@ -12,46 +12,49 @@ TASK_ID taskSandStormGen;
 
 void start(void)
 {
-	sysClkRateSet(250);
-	printf("%d\n", sysClkRateGet());
-	
-	cpuset_t affinity;
-	CPUSET_ZERO (affinity);
-	CPUSET_SET  (affinity, 1);
-	taskCpuAffinitySet(taskIdSelf(), affinity);
-	
-    // Semaphore
+    sysClkRateSet(250);
+    printf("%d\n", sysClkRateGet());
+
+    /* Handle CPU */
+    cpuset_t affinity;
+    CPUSET_ZERO(affinity);
+    CPUSET_SET(affinity, 1);
+    taskCpuAffinitySet(taskIdSelf(), affinity);
+
+    /* Semaphore */
     mov = newMutex();
     updateCeiling(mov, P3);
     updateCeiling(mov, P4);
     updateCeiling(mov, P5);
 
-    // Mailbox
+    /* Mailbox */
     cmd = mq_open("cmd", O_RDWR);
     prs = mq_open("prs", O_RDWR);
 
-    // Spawn
-    //taskDirectionGen = taskSpawn("generatorTaskDirection", 0, 0, 4000, (FUNCPTR)generatorDirectionTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    //taskMovementGen = taskSpawn("generatorTaskMovement", 0, 0, 4000, (FUNCPTR)generatorMovementTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    /* Spawn */
+    taskDirectionGen = taskSpawn("generatorTaskDirection", 0, 0, 4000, (FUNCPTR)generatorDirectionTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    taskMovementGen = taskSpawn("generatorTaskMovement", 0, 0, 4000, (FUNCPTR)generatorMovementTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     taskPhotographGen = taskSpawn("generatorTaskPhotograph", 0, 0, 4000, (FUNCPTR)generatorPhotographTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     taskGeologicalSampleGen = taskSpawn("generatorTaskGeological", 0, 0, 4000, (FUNCPTR)generatorGeologicalSampleTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    //taskAtmosphericGen = taskSpawn("generatorTaskAtmospheric", 0, 0, 4000, (FUNCPTR)generatorAtmosphericPressureTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    //taskAltitudeGen = taskSpawn("generatorTaskAltitude", 0, 0, 4000, (FUNCPTR)generatorAltitudeRecordTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    taskTemperatureGen = taskSpawn("generatorTaskTemperature", 0, 0, 4000, (FUNCPTR)generatorTemperatureRecordTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    taskAtmosphericGen = taskSpawn("generatorTaskAtmospheric", 0, 0, 4000, (FUNCPTR)generatorAtmosphericPressureTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    // taskAltitudeGen = taskSpawn("generatorTaskAltitude", 0, 0, 4000, (FUNCPTR)generatorAltitudeRecordTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    // taskTemperatureGen = taskSpawn("generatorTaskTemperature", 0, 0, 4000, (FUNCPTR)generatorTemperatureRecordTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     taskSandStormGen = taskSpawn("generatorTaskSandStorm", 0, 0, 4000, (FUNCPTR)generatorSandStormDetectionTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 }
 
 void stop(void)
 {
+    /*** Stop Generators ***/
     taskDelete(taskDirectionGen);
     taskDelete(taskMovementGen);
     taskDelete(taskPhotographGen);
     taskDelete(taskGeologicalSampleGen);
     taskDelete(taskAtmosphericGen);
-    taskDelete(taskAltitudeGen);
-    taskDelete(taskTemperatureGen);
+    // taskDelete(taskAltitudeGen);
+    // taskDelete(taskTemperatureGen);
     taskDelete(taskSandStormGen);
 
+    /*** Stop Jobs ***/
     if (taskSatellite != NULL)
     {
         taskDelete(taskSatellite);
@@ -82,21 +85,22 @@ void stop(void)
         taskDelete(taskAtmosphericPressure);
     }
 
-    if (taskAltitudeRecord != NULL)
-    {
-        taskDelete(taskAltitudeRecord);
-    }
+    // if (taskAltitudeRecord != NULL)
+    // {
+    //     taskDelete(taskAltitudeRecord);
+    // }
 
-    if (taskTemperatureRecord != NULL)
-    {
-        taskDelete(taskTemperatureRecord);
-    }
+    // if (taskTemperatureRecord != NULL)
+    // {
+    //     taskDelete(taskTemperatureRecord);
+    // }
 
     if (taskSandStormDetection != NULL)
     {
         taskDelete(taskSandStormDetection);
     }
 
+    semDelete(mov->sem);
     mq_close(cmd);
     mq_close(prs);
 
