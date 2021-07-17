@@ -9,9 +9,9 @@
 
 extern int msleep(long ms);
 
-extern long executionTime(long BCET, long WCET);
+extern int executionTime(int BCET, int WCET);
 
-extern long msToTick(long ms);
+extern unsigned int msToTick(int ms);
 
 extern long intervalToMs(UINT32 start, UINT32 end);
 

@@ -22,12 +22,12 @@ int msleep(long ms) {
 }
 
 /* executionTime():  returns a random execution time between a min and a max*/
-long executionTime(long BCET, long WCET) {
+int executionTime(int BCET, int WCET) {
 	return rand() % (WCET - BCET + 1) + BCET;
 }
 
 /* msToTick(): returns the number of ticks in a requested number of milliseconds */
-long msToTick(long ms) {
+unsigned int msToTick(int ms) {
 	return sysClkRateGet() * (ms / 1000);
 }
 

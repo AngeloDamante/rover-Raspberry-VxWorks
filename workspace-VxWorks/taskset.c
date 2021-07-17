@@ -18,7 +18,7 @@ int jobDirection()
     // C22
     computeDest();
     char *msg = "Direction_send_msg";
-    mq_send(cmd, msg, sizeof(char) * 50, NULL); // FIXME MAGIC NUMBER
+    mq_send(cmd, msg, sizeof(char) * 25, NULL); // FIXME MAGIC NUMBER
 
     // End Job
     taskDelete(taskIdSelf());
@@ -28,14 +28,17 @@ int jobDirection()
 int jobMovement()
 {
     // C31
-    char *msg;
-    mq_receive(cmd, msg, sizeof(char) * 50, NULL); // FIXME MAGIC NUMBER
+    char *msg = (char*) malloc(25 * sizeof(char));
+    mq_receive(cmd, msg, sizeof(char) * 25, NULL); // FIXME MAGIC NUMBER
     receiveCmd();
 
     // C32 -> Critical Section
     semTake(mov->sem, WAIT_FOREVER);
+    pinMode(MUTEX, OUT);
+    gpioWrite(MUTEX, HIGH);
     move();
     semGive(mov->sem);
+    gpioWrite(MUTEX, LOW);
 
     // End Job
     taskDelete(taskIdSelf());
@@ -46,8 +49,11 @@ int jobPhotograph()
 {
     // C41 -> Critical Section
     semTake(mov->sem, WAIT_FOREVER);
+    pinMode(MUTEX, OUT);
+    gpioWrite(MUTEX, HIGH);
     takePhoto();
     semGive(mov->sem);
+    gpioWrite(MUTEX, LOW);
 
     // End Job
     taskDelete(taskIdSelf());
@@ -61,9 +67,12 @@ int jobGeologicalSample()
 
     // Critical Section
     semTake(mov->sem, WAIT_FOREVER);
+    pinMode(MUTEX, OUT);
+    gpioWrite(MUTEX, HIGH);
     drill();   // C51
     collect(); // C52
     semGive(mov->sem);
+    gpioWrite(MUTEX, LOW);
 
     // boost
     taskPrioritySet(taskIdSelf(), P5);
@@ -78,7 +87,7 @@ int jobAtmosphericPressure()
     // C61
     recordPress();
     char *msg = "AtmPresSensor_send_msg";
-    mq_send(prs, msg, sizeof(char) * 50, NULL); // FIXME MAGIC NUMBER
+    mq_send(prs, msg, sizeof(char) * 25, NULL); // FIXME MAGIC NUMBER
 
     // End Job
     taskDelete(taskIdSelf());
@@ -88,8 +97,8 @@ int jobAtmosphericPressure()
 int jobAltitudeRecord()
 {
     // C71
-    char *msg;
-    mq_receive(prs, msg, sizeof(char) * 50, NULL); // FIXME MAGIC NUMBER
+    char *msg = (char*) malloc(25 * sizeof(char));
+    mq_receive(prs, msg, sizeof(char) * 25, NULL); // FIXME MAGIC NUMBER
     recordAltitude();
 
     // End Job
