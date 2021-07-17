@@ -4,6 +4,9 @@
 #include <time.h>
 #include <errno.h>    
 
+#define true 1
+#define false 0
+
 extern int msleep(long ms);
 
 extern long executionTime(long BCET, long WCET);
