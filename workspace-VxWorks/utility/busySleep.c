@@ -49,7 +49,6 @@ void busySleep(int ms) {
 }
 
 void testBusySleep(int ms, int numExp) {
-	sysClkRateSet(100);
     printf("Test busy sleep for %d ms\n", ms);
     
     UINT32 time1, time2, time3 = 0;
