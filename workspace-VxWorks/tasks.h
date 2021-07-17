@@ -1,4 +1,6 @@
 #include "taskset.h"
+#include "utility/utils.h"
+#include <signal.h>
 
 void spawnSatelliteTask()
 {
@@ -55,13 +57,13 @@ void generatorAltitudeRecordTask()
 {
     while (true)
     {
-        struct sigevent sigv; 
+        struct sigevent sigv;
         sigv.sigev_notify = SIGEV_THREAD;
-        sigv.sigev_notify_function = jobAltitudeRecord;
+        sigv.sigev_notify_function = (void *)jobAltitudeRecord;
         sigv.sigev_notify_attributes = NULL;
         sigv.sigev_value.sival_ptr = &prs;
-        mq_notify(prs, sigv);
-        
+        mq_notify(prs, &sigv);
+
         // taskAltitudeRecord = taskSpawn("Altitude", (int)P7, 0, 4000, (FUNCPTR)jobAltitudeRecord, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
 }

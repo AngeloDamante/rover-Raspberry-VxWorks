@@ -1,4 +1,5 @@
 #include "tasks.h"
+#include "taskset.h"
 
 TASK_ID taskDirectionGen;
 TASK_ID taskMovementGen;

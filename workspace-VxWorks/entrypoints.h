@@ -1,6 +1,10 @@
 #ifndef ENTRYPOINTS_H
 #define ENTRYPOINTS_H
 
+#include "hwLib/gpioLib.h"
+#include "hwLib/pin.h"
+#include "utility/utils.h"
+#include "utility/busySleep.h"
 #include "tasksetSpec.h"
 
 /* Task 1 */

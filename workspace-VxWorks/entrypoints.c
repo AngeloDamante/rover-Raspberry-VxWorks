@@ -1,7 +1,3 @@
-#include "hwLib/gpioLib.h"
-#include "hwLib/pin.h"
-#include "utility/utils.h"
-#include "utility/busySleep.h"
 #include "entrypoints.h"
 
 int transmitData()
