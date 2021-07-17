@@ -3,7 +3,7 @@
 #include "vxWorks.h"
 #include <stdio.h>
 #include <usrLib.h>
-#include "include/utils.h"
+#include "utility/utils.h"
 #include "hwLib/gpioLib.h"
 
 #define NUM_TESTS 1000000

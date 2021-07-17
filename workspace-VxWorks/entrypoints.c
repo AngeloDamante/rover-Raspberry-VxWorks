@@ -47,9 +47,9 @@ int move()
 
     // Computation Mission
     right_rotate();
-    busySleep(400);
-    forward();
     busySleep(450);
+    forward();
+    busySleep(400);
 
     // Turn OFF Sensor
     stop_vehicle();
