@@ -8,7 +8,6 @@ void busySleepByNumCycles(long long numCycles);
 void linearRegression(const double *x, const double *y, int size);
 
 void getBusySleepParams(long long numCycles, int numSteps, int numExp) {
-	sysClkRateSet(100);
     double *numCyclesArray = malloc(sizeof(double) * numSteps);
     double *timeArray = malloc(sizeof(double) * numSteps);
 
@@ -37,8 +36,6 @@ void getBusySleepParams(long long numCycles, int numSteps, int numExp) {
 
 void busySleep(int ms) {
 	// Paste here your busy sleep params
-	// double a = 5.030389e-06;
-	// double b = -3.864352e-01;
 	double a = 3.167546e-05;
 	double b = -5.655099e-01;
 	
@@ -66,12 +63,11 @@ void testBusySleep(int ms, int numExp) {
 	time3 = sysTimestamp();
     
     long measured = (long)(time3 - 2 * time2 + time1) * 1000 / sysTimestampFreq() / numExp;
-	printf("Measured time: %.3f s (error: %d ms)\n", measured / 1000., measured - ms);
+	printf("Measured time: %.3f ms (error: %f us)\n", measured / 1., (measured/1. - ms/1.)*1000);
 }
 
 
 void busySleepErrorHistogram(int ms, int numExp) {
-	sysClkRateSet(100);
 	printf("Busy sleep histogram for %d ms\n", ms);
 
 	int histogramSize = 100;
