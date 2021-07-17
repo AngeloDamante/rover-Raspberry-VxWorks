@@ -13,7 +13,7 @@ TASK_ID taskSandStormGen;
 void start(void)
 {
     sysClkRateSet(250);
-    printf("%d\n", sysClkRateGet());
+    init_motor_shield();
 
     /* Handle CPU */
     cpuset_t affinity;
@@ -101,8 +101,19 @@ void stop(void)
     }
 
     semDelete(mov->sem);
+    free(mov);
+
     mq_close(cmd);
     mq_close(prs);
 
-    free(mov);
+    /* Free BUS */
+    gpioFree(ANTENNA);
+    gpioFree(MOTORS);
+    gpioFree(CAMERA);
+    gpioFree(DRILL);
+    gpioFree(ROB_ARM);
+    gpioFree(PRESS_SENS);
+    gpioFree(TEMP_SENS);
+    gpioFree(STORM_SENS);
+    free_bus_vehicle();
 }

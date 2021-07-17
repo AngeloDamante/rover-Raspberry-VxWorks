@@ -1,6 +1,7 @@
 #include "l298n.h"
 
-void init_shield(){
+void init_motor_shield()
+{
     pinMode(ENA, OUT);
     pinMode(ENB, OUT);
     pinMode(IN1, OUT);
@@ -16,58 +17,79 @@ void init_shield(){
 }
 
 /* SIDES */
-void right_forward(){
+void right_forward()
+{
     gpioWrite(IN1, HIGH);
     gpioWrite(IN2, LOW);
 }
 
-void right_backward(){
+void right_backward()
+{
     gpioWrite(IN1, LOW);
     gpioWrite(IN2, HIGH);
 }
 
-void right_braking(){
+void right_braking()
+{
     gpioWrite(IN1, LOW);
     gpioWrite(IN2, LOW);
 }
 
-void left_forward(){
+void left_forward()
+{
     gpioWrite(IN3, LOW);
     gpioWrite(IN4, HIGH);
 }
 
-void left_backward(){
+void left_backward()
+{
     gpioWrite(IN3, HIGH);
     gpioWrite(IN4, LOW);
 }
 
-void left_braking(){
+void left_braking()
+{
     gpioWrite(IN3, LOW);
     gpioWrite(IN4, LOW);
 }
 
 /* VEHICLE */
-void forward(){
+void forward()
+{
     right_forward();
     left_forward();
 }
 
-void backward(){
+void backward()
+{
     right_backward();
     left_backward();
 }
 
-void left_rotate(){
+void left_rotate()
+{
     right_forward();
     left_backward();
 }
 
-void right_rotate(){
+void right_rotate()
+{
     right_backward();
     left_forward();
 }
 
-void stop_vehicle(){
+void stop_vehicle()
+{
     right_braking();
     left_braking();
+}
+
+void free_bus_vehicle()
+{
+    gpioFree(ENA);
+    gpioFree(ENB);
+    gpioFree(IN1);
+    gpioFree(IN2);
+    gpioFree(IN3);
+    gpioFree(IN4);
 }

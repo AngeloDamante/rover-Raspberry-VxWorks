@@ -17,5 +17,6 @@
 int gpioWrite(UINT32 gpioNum, UINT32 value);
 int gpioRead(UINT32 gpioNum);
 int pinMode(UINT32 gpioNum, UINT32 value);
+int gpioFree(UINT32 gpioNum);
 
 #endif /* GPIOLIB_H */

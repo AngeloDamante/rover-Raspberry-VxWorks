@@ -15,3 +15,7 @@ int pinMode(UINT32 gpioNum, UINT32 value)
     return vxbGpioSetDir(gpioNum, value);
 }
 
+int gpioFree(UINT32 gpioNum)
+{
+    return vxbGpioFree(gpioNum);
+}

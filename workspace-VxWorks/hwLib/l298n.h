@@ -4,7 +4,7 @@
 #include "pin.h"
 #include "gpioLib.h"
 
-void init_shield();
+void init_motor_shield();
 
 /* SIDES */
 void right_forward();
@@ -23,5 +23,6 @@ void left_rotate();
 void right_rotate();
 
 void stop_vehicle();
+void free_bus_vehicle();
 
 #endif /* L298N_H */

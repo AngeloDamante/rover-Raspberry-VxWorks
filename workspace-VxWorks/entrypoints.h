@@ -3,6 +3,7 @@
 
 #include "hwLib/gpioLib.h"
 #include "hwLib/pin.h"
+#include "hwLib/l298n.h"
 #include "utility/utils.h"
 #include "utility/busySleep.h"
 #include "tasksetSpec.h"

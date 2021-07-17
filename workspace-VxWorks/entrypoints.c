@@ -45,12 +45,14 @@ int move()
     pinMode(MOTORS, OUT);
     gpioWrite(MOTORS, HIGH);
 
-    // Computation
-    busySleep(executionTime(C32_BCET, C32_WCET));
-
-    // TODO mission
+    // Computation Mission
+    right_rotate();
+    busySleep(400);
+    forward();
+    busySleep(450);
 
     // Turn OFF Sensor
+    stop_vehicle();
     gpioWrite(MOTORS, LOW);
 
     return 0;
