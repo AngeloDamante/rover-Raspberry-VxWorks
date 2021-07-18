@@ -28,7 +28,7 @@ int executionTime(int BCET, int WCET) {
 
 /* msToTick(): returns the number of ticks in a requested number of milliseconds */
 unsigned int msToTick(int ms) {
-	return sysClkRateGet() * (ms / 1000);
+	return sysClkRateGet() * ms / 1000;
 }
 
 /* intervalToMs(): returns the number of milliseconds from two timestamps */

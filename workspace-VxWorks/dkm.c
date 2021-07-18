@@ -29,7 +29,7 @@ void start(void)
     /* Mailbox */
     cmd = msgQCreate(1, 25, MSG_Q_FIFO);
     prs = msgQCreate(1, 25, MSG_Q_FIFO);
-    
+
     logs = initLogger();
     
     /* Spawn */
@@ -117,6 +117,6 @@ void stop(void)
     gpioFree(TEMP_SENS);
     gpioFree(STORM_SENS);
     free_bus_vehicle();
-    
+
     saveLog(logs, "RTAI_log.txt");
 }
