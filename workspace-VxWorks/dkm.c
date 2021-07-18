@@ -36,9 +36,9 @@ void start(void)
     taskMovementGen = taskSpawn("generatorTaskMovement", 0, 0, 4000, (FUNCPTR)generatorMovementTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     taskPhotographGen = taskSpawn("generatorTaskPhotograph", 0, 0, 4000, (FUNCPTR)generatorPhotographTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     taskGeologicalSampleGen = taskSpawn("generatorTaskGeological", 0, 0, 4000, (FUNCPTR)generatorGeologicalSampleTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    taskAltitudeGen = taskSpawn("generatorTaskAltitude", 0, 0, 4000, (FUNCPTR)generatorAltitudeRecordTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     taskAtmosphericGen = taskSpawn("generatorTaskAtmospheric", 0, 0, 4000, (FUNCPTR)generatorAtmosphericPressureTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    // taskAltitudeGen = taskSpawn("generatorTaskAltitude", 0, 0, 4000, (FUNCPTR)generatorAltitudeRecordTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    // taskTemperatureGen = taskSpawn("generatorTaskTemperature", 0, 0, 4000, (FUNCPTR)generatorTemperatureRecordTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    taskTemperatureGen = taskSpawn("generatorTaskTemperature", 0, 0, 4000, (FUNCPTR)generatorTemperatureRecordTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     taskSandStormGen = taskSpawn("generatorTaskSandStorm", 0, 0, 4000, (FUNCPTR)generatorSandStormDetectionTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 }
 
@@ -50,8 +50,8 @@ void stop(void)
     taskDelete(taskPhotographGen);
     taskDelete(taskGeologicalSampleGen);
     taskDelete(taskAtmosphericGen);
-    // taskDelete(taskAltitudeGen);
-    // taskDelete(taskTemperatureGen);
+    taskDelete(taskAltitudeGen);
+    taskDelete(taskTemperatureGen);
     taskDelete(taskSandStormGen);
 
     /*** Stop Jobs ***/
@@ -85,15 +85,15 @@ void stop(void)
         taskDelete(taskAtmosphericPressure);
     }
 
-    // if (taskAltitudeRecord != NULL)
-    // {
-    //     taskDelete(taskAltitudeRecord);
-    // }
+    if (taskAltitudeRecord != NULL)
+    {
+        taskDelete(taskAltitudeRecord);
+    }
 
-    // if (taskTemperatureRecord != NULL)
-    // {
-    //     taskDelete(taskTemperatureRecord);
-    // }
+    if (taskTemperatureRecord != NULL)
+    {
+        taskDelete(taskTemperatureRecord);
+    }
 
     if (taskSandStormDetection != NULL)
     {

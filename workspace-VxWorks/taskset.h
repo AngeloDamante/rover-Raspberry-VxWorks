@@ -34,6 +34,7 @@ int jobAltitudeRecord();
 int jobTemperatureRecord();
 int jobSandStormDetection();
 
+struct sigevent sigv;
 struct mutex *mov;
 mqd_t cmd, prs;
 

@@ -120,7 +120,7 @@ int recordPress()
 
 int recordAltitude()
 {
-    // Computation
+    // COmputation
     busySleep(executionTime(C71_BCET, C71_WCET));
 
     return 0;

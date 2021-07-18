@@ -4,6 +4,7 @@
 
 void spawnSatelliteTask()
 {
+    taskPrioritySet(taskIdSelf(), 0); // boost
     cpuset_t affinity;
     CPUSET_ZERO(affinity);
     CPUSET_SET(affinity, 1);
@@ -59,17 +60,16 @@ void generatorAtmosphericPressureTask()
 
 void generatorAltitudeRecordTask()
 {
-    while (true)
-    {
-        struct sigevent sigv;
-        sigv.sigev_notify = SIGEV_THREAD;
-        sigv.sigev_notify_function = (void *)jobAltitudeRecord;
-        sigv.sigev_notify_attributes = NULL;
-        sigv.sigev_value.sival_ptr = &prs;
-        mq_notify(prs, &sigv);
+    sigv.sigev_notify = SIGEV_THREAD;
+    sigv.sigev_notify_function = (void *)jobAltitudeRecord;
+    sigv.sigev_notify_attributes = NULL;
+    sigv.sigev_value.sival_ptr = &prs;
+    mq_notify(prs, &sigv);
 
-        // taskAltitudeRecord = taskSpawn("Altitude", (int)P7, 0, 4000, (FUNCPTR)jobAltitudeRecord, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    }
+    // while (true)
+    // {
+    //     // taskAltitudeRecord = taskSpawn("Altitude", (int)P7, 0, 4000, (FUNCPTR)jobAltitudeRecord, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    // }
 }
 
 void generatorTemperatureRecordTask()
