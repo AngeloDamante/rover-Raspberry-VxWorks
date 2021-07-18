@@ -8,7 +8,6 @@
 #include "utility/busySleep.h"
 #include "tasksetSpec.h"
 
-// #include "pthread.h"
 #include <unistd.h>
 
 /* Task 1 */

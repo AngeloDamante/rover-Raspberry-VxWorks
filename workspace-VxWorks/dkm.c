@@ -12,7 +12,6 @@ TASK_ID taskSandStormGen;
 
 void start(void)
 {
-    sysClkRateSet(250);
     init_motor_shield();
 
     /* Handle CPU */
@@ -28,16 +27,16 @@ void start(void)
     updateCeiling(mov, P5);
 
     /* Mailbox */
-    cmd = mq_open("cmd", O_RDWR);
-    prs = mq_open("prs", O_RDWR);
-
+    cmd = msgQCreate(1, 25, MSG_Q_FIFO);
+    prs = msgQCreate(1, 25, MSG_Q_FIFO);
+    
     /* Spawn */
     taskDirectionGen = taskSpawn("generatorTaskDirection", 0, 0, 4000, (FUNCPTR)generatorDirectionTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     taskMovementGen = taskSpawn("generatorTaskMovement", 0, 0, 4000, (FUNCPTR)generatorMovementTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     taskPhotographGen = taskSpawn("generatorTaskPhotograph", 0, 0, 4000, (FUNCPTR)generatorPhotographTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     taskGeologicalSampleGen = taskSpawn("generatorTaskGeological", 0, 0, 4000, (FUNCPTR)generatorGeologicalSampleTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    taskAltitudeGen = taskSpawn("generatorTaskAltitude", 0, 0, 4000, (FUNCPTR)generatorAltitudeRecordTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     taskAtmosphericGen = taskSpawn("generatorTaskAtmospheric", 0, 0, 4000, (FUNCPTR)generatorAtmosphericPressureTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    taskAltitudeGen = taskSpawn("generatorTaskAltitude", 0, 0, 4000, (FUNCPTR)generatorAltitudeRecordTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     taskTemperatureGen = taskSpawn("generatorTaskTemperature", 0, 0, 4000, (FUNCPTR)generatorTemperatureRecordTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     taskSandStormGen = taskSpawn("generatorTaskSandStorm", 0, 0, 4000, (FUNCPTR)generatorSandStormDetectionTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 }
@@ -103,8 +102,8 @@ void stop(void)
     semDelete(mov->sem);
     free(mov);
 
-    mq_close(cmd);
-    mq_close(prs);
+    msgQDelete(cmd);
+    msgQDelete(prs);
 
     /* Free BUS */
     gpioFree(ANTENNA);

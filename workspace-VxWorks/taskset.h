@@ -3,6 +3,7 @@
 
 #include "vxWorks.h"
 #include "semLib.h"
+#include "msgQLib.h"
 #include "hwLib/gpioLib.h"
 #include "hwLib/pin.h"
 #include "utility/utils.h"
@@ -10,8 +11,6 @@
 #include "utility/mutex.h"
 
 #include <stdio.h>
-#include <mqueue.h>
-#include <signal.h>
 #include "entrypoints.h"
 
 TASK_ID taskSatellite;
@@ -30,12 +29,12 @@ int jobMovement();
 int jobPhotograph();
 int jobGeologicalSample();
 int jobAtmosphericPressure();
-int jobAltitudeRecord();
+int jobAltitudeRecord(char* msg);
 int jobTemperatureRecord();
 int jobSandStormDetection();
 
-struct sigevent sigv;
 struct mutex *mov;
-mqd_t cmd, prs;
+
+MSG_Q_ID cmd, prs;
 
 #endif /* TASKSET_H */

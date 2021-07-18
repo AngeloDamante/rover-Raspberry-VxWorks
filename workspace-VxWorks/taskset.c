@@ -18,7 +18,7 @@ int jobDirection()
     // C22
     computeDest();
     char *msg = "Direction_send_msg";
-    mq_send(cmd, msg, sizeof(char) * 25, NULL); // FIXME MAGIC NUMBER
+    msgQSend(prs, msg, 25, WAIT_FOREVER, MSG_PRI_NORMAL);
 
     // End Job
     taskDelete(taskIdSelf());
@@ -29,7 +29,7 @@ int jobMovement()
 {
     // C31
     char *msg = (char *)malloc(25 * sizeof(char));
-    mq_receive(cmd, msg, sizeof(char) * 25, NULL); // FIXME MAGIC NUMBER
+    msgQReceive(prs, msg, 25, WAIT_FOREVER);
     receiveCmd();
 
     // C32 -> Critical Section
@@ -88,30 +88,16 @@ int jobAtmosphericPressure()
     recordPress();
     char *msg = "AtmPresSensor_send_msg";
     printf("msgSend! \n");
-    mq_send(prs, msg, sizeof(char) * 25, NULL); // FIXME MAGIC NUMBER
+    msgQSend(cmd, msg, 25, WAIT_FOREVER, MSG_PRI_NORMAL);
 
     // End Job
     taskDelete(taskIdSelf());
     return 0;
 }
 
-int jobAltitudeRecord()
+int jobAltitudeRecord(char* msg)
 {
-    // Notify
-    mq_notify(prs, &sigv);
-
-    // Affinity
-    cpuset_t affinity;
-    CPUSET_ZERO(affinity);
-    CPUSET_SET(affinity, 1);
-    taskCpuAffinitySet(taskIdSelf(), affinity);
-
-    // Priority
-    taskPrioritySet(taskIdSelf(), P7);
-    
     // C71
-    char *msg = (char *)malloc(25 * sizeof(char));
-    mq_receive(prs, msg, sizeof(char) * 25, NULL); // FIXME MAGIC NUMBER
     recordAltitude();
 
     // Receive

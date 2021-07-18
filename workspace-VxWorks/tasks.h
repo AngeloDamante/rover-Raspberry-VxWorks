@@ -60,16 +60,12 @@ void generatorAtmosphericPressureTask()
 
 void generatorAltitudeRecordTask()
 {
-    sigv.sigev_notify = SIGEV_THREAD;
-    sigv.sigev_notify_function = (void *)jobAltitudeRecord;
-    sigv.sigev_notify_attributes = NULL;
-    sigv.sigev_value.sival_ptr = &prs;
-    mq_notify(prs, &sigv);
-
-    // while (true)
-    // {
-    //     // taskAltitudeRecord = taskSpawn("Altitude", (int)P7, 0, 4000, (FUNCPTR)jobAltitudeRecord, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    // }
+    while (true)
+    {
+    	char *msg = (char *)malloc(25 * sizeof(char));
+    	msgQReceive(cmd, msg, 25, WAIT_FOREVER);
+		taskAltitudeRecord = taskSpawn("Altitude", (int)P7, 0, 4000, (FUNCPTR)jobAltitudeRecord, (long)msg, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    }
 }
 
 void generatorTemperatureRecordTask()
