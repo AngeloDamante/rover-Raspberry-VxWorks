@@ -8,7 +8,7 @@
 #define MSG_LENGTH  sizeof(struct event)
 
 struct event {
-    char transition[5];
+    char *transition;
     struct timespec time;
 };
 
@@ -25,7 +25,8 @@ MSG_Q_ID initLogger(){
 void logEvent(MSG_Q_ID logQueue, char * transition){
     struct event log;
     clock_gettime(CLOCK_REALTIME, &log.time);
-    memcpy(&log.transition, transition, 5*sizeof(char));
+    log.transition = transition;
+    //memcpy(&log.transition, transition, 5*sizeof(char));
     msgQSend(logQueue, (char *) &log, MSG_LENGTH, WAIT_FOREVER, MSG_PRI_NORMAL);
 }
 
