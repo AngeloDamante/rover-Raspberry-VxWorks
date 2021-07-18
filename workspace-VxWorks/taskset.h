@@ -9,6 +9,7 @@
 #include "utility/utils.h"
 #include "utility/busySleep.h"
 #include "utility/mutex.h"
+#include "utility/log.h"
 
 #include <stdio.h>
 #include "entrypoints.h"
@@ -29,12 +30,13 @@ int jobMovement();
 int jobPhotograph();
 int jobGeologicalSample();
 int jobAtmosphericPressure();
-int jobAltitudeRecord(char* msg);
+int jobAltitudeRecord(long prs);
 int jobTemperatureRecord();
 int jobSandStormDetection();
 
 struct mutex *mov;
 
 MSG_Q_ID cmd, prs;
+MSG_Q_ID logs;
 
 #endif /* TASKSET_H */

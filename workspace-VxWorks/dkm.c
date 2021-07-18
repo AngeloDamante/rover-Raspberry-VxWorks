@@ -30,6 +30,8 @@ void start(void)
     cmd = msgQCreate(1, 25, MSG_Q_FIFO);
     prs = msgQCreate(1, 25, MSG_Q_FIFO);
     
+    logs = initLogger();
+    
     /* Spawn */
     taskDirectionGen = taskSpawn("generatorTaskDirection", 0, 0, 4000, (FUNCPTR)generatorDirectionTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     taskMovementGen = taskSpawn("generatorTaskMovement", 0, 0, 4000, (FUNCPTR)generatorMovementTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -115,4 +117,6 @@ void stop(void)
     gpioFree(TEMP_SENS);
     gpioFree(STORM_SENS);
     free_bus_vehicle();
+    
+    saveLog(logs, "RTAI_log.txt");
 }
