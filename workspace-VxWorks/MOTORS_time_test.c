@@ -43,7 +43,8 @@ void start(void)
 	printf("time: %ld", ms);
 }
 
-void load_m(){
+void load_m()
+{
 	load_mission_file();
 }
 
@@ -51,33 +52,52 @@ void test(void)
 {
 	init_motor_shield();
 
-	if (mission[ack] == FORWARD)
-	{
-		forward_vehicle();
-		busySleep(400);
-	}
+	UINT32 start = sysTimestampLock();
 
-	if (mission[ack] == BACKWARD)
+	for (int i = 0; i < NUM_TESTS; i++)
 	{
-		backward_vehicle();
-		busySleep(400);
-	}
+		if (ack < len_mission)
+		{
 
-	if (mission[ack] == RIGHT_ROTATE)
-	{
-		right_rotate_vehicle();
-		busySleep(400);
-	}
+			switch (mission[ack])
+			{
+			case FORWARD:
+				forward_vehicle();
+				break;
 
-	if (mission[ack] == LEFT_ROTATE)
-	{
-		left_rotate_vehicle();
-		busySleep(400);
-	}
-	ack++;
+			case BACKWARD:
+				backward_vehicle();
+				break;
 
-	if (ack == len_mission)
-	{
-		ack = 0;
+			case LEFT_ROTATE:
+				left_rotate_vehicle();
+
+				stop_vehicle();
+
+				break;
+
+			case RIGHT_ROTATE:
+				right_rotate_vehicle();
+
+				stop_vehicle();
+
+				break;
+
+			case STOP:
+				stop_vehicle();
+
+				break;
+
+			default:
+				break;
+			}
+			ack = (ack + 1) % len_mission;
+		}
+		stop_vehicle();
 	}
+	
+	UINT32 end = sysTimestampLock();
+
+	long ms = intervalToMs(start, end);
+	printf("time: %ld", ms);
 }

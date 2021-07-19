@@ -53,27 +53,31 @@ int move()
         {
         case FORWARD:
             forward_vehicle();
-            busySleep(400);
+            busySleep(800);
             break;
 
         case BACKWARD:
             backward_vehicle();
-            busySleep(400);
+            busySleep(800);
             break;
 
         case LEFT_ROTATE:
             left_rotate_vehicle();
             busySleep(450);
+            stop_vehicle();
+            busySleep(350);
             break;
 
         case RIGHT_ROTATE:
             right_rotate_vehicle();
             busySleep(450);
+            stop_vehicle();
+            busySleep(350);
             break;
 
         case STOP:
             stop_vehicle();
-            busySleep(450);
+            busySleep(800);
             break;
 
         default:

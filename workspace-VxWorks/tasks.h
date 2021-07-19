@@ -4,20 +4,18 @@
 
 void spawnSatelliteTask()
 {
-	// boost
+    // boost
     taskPrioritySet(taskIdSelf(), 0);
-    
+
     // affinity
     cpuset_t affinity;
     CPUSET_ZERO(affinity);
     CPUSET_SET(affinity, 1);
     taskCpuAffinitySet(taskIdSelf(), affinity);
-    
+
     // spawn
     taskSatellite = taskSpawn("Satellite", (int)P1, 0, 4000, (FUNCPTR)jobSatellite, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     logEvent(logs, "t_1r");
-    
-    load_mission_file();
 }
 
 void generatorDirectionTask()
@@ -76,9 +74,9 @@ void generatorAltitudeRecordTask()
 {
     while (true)
     {
-    	char *prs = (char*) malloc(sizeof(long));
-    	msgQReceive(cmd, prs, 8, WAIT_FOREVER);
-		taskAltitudeRecord = taskSpawn("Altitude", (int)P7, 0, 4000, (FUNCPTR)jobAltitudeRecord, (long)*prs, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        char *prs = (char *)malloc(sizeof(long));
+        msgQReceive(cmd, prs, 8, WAIT_FOREVER);
+        taskAltitudeRecord = taskSpawn("Altitude", (int)P7, 0, 4000, (FUNCPTR)jobAltitudeRecord, (long)*prs, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
 }
 
