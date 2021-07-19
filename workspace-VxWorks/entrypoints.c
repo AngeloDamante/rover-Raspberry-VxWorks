@@ -46,10 +46,48 @@ int move()
     gpioWrite(MOTORS, HIGH);
 
     // Computation Mission
-    right_rotate();
-    busySleep(450);
-    forward();
-    busySleep(400);
+    if (ack < len_mission)
+    {
+
+        switch (mission[ack])
+        {
+        case FORWARD:
+            forward_vehicle();
+            busySleep(400);
+            break;
+
+        case BACKWARD:
+            backward_vehicle();
+            busySleep(400);
+            break;
+
+        case LEFT_ROTATE:
+            left_rotate_vehicle();
+            busySleep(450);
+            break;
+
+        case RIGHT_ROTATE:
+            right_rotate_vehicle();
+            busySleep(450);
+            break;
+
+        case STOP:
+            stop_vehicle();
+            busySleep(450);
+            break;
+
+        default:
+            break;
+        }
+        ack++;
+    } else{
+        busySleep(executionTime(C32_BCET, C32_WCET));
+    }
+
+    // right_rotate_vehicle();
+    // busySleep(450);
+    // forward_vehicle();
+    // busySleep(400);
 
     // Turn OFF Sensor
     stop_vehicle();

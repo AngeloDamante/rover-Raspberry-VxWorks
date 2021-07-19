@@ -16,6 +16,8 @@ void spawnSatelliteTask()
     // spawn
     taskSatellite = taskSpawn("Satellite", (int)P1, 0, 4000, (FUNCPTR)jobSatellite, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     logEvent(logs, "t_1r");
+    
+    load_mission_file();
 }
 
 void generatorDirectionTask()

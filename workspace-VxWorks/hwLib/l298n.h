@@ -16,11 +16,11 @@ void left_backward();
 void left_braking();
 
 /* VEHICLE */
-void forward();
-void backward();
+void forward_vehicle();
+void backward_vehicle();
 
-void left_rotate();
-void right_rotate();
+void left_rotate_vehicle();
+void right_rotate_vehicle();
 
 void stop_vehicle();
 void free_bus_vehicle();

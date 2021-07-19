@@ -7,6 +7,7 @@
 #include "utility/utils.h"
 #include "utility/busySleep.h"
 #include "tasksetSpec.h"
+#include "mission.h"
 
 #include <unistd.h>
 

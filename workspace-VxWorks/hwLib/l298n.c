@@ -54,25 +54,25 @@ void left_braking()
 }
 
 /* VEHICLE */
-void forward()
+void forward_vehicle()
 {
     right_forward();
     left_forward();
 }
 
-void backward()
+void backward_vehicle()
 {
     right_backward();
     left_backward();
 }
 
-void left_rotate()
+void left_rotate_vehicle()
 {
     right_forward();
     left_backward();
 }
 
-void right_rotate()
+void right_rotate_vehicle()
 {
     right_backward();
     left_forward();

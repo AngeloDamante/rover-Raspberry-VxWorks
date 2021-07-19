@@ -12,6 +12,8 @@ TASK_ID taskSandStormGen;
 
 void start(void)
 {
+    /* Preparing to Mission */
+    load_mission_file();
     init_motor_shield();
 
     /* Handle CPU */
