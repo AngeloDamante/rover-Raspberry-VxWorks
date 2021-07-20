@@ -61,15 +61,15 @@ void testBusySleep(int ms, int numExp) {
 	}
 	time3 = sysTimestamp();
     
-    long measured = (long)(time3 - 2 * time2 + time1) * 1000 / sysTimestampFreq() / numExp;
-	printf("Measured time: %.3f ms (error: %f us)\n", measured / 1., (measured/1. - ms/1.)*1000);
+    double measured = (double)(time3 - 2 * time2 + time1) * 1000 / sysTimestampFreq() / numExp;
+	printf("Measured time: %.3f ms (error: %f us)\n", measured, (measured - ms/1l)*1000);
 }
 
 
 void busySleepErrorHistogram(int ms, int numExp) {
 	printf("Busy sleep histogram for %d ms\n", ms);
 
-	int histogramSize = 100;
+	int histogramSize = 1500;
 	long *histogram = malloc(sizeof(long) * histogramSize);
 	for (int i = 0; i < histogramSize; i++) {
 		histogram[i] = 0;
@@ -80,9 +80,10 @@ void busySleepErrorHistogram(int ms, int numExp) {
 		time1 = sysTimestamp();
 		busySleep(ms);
 		time2 = sysTimestamp();
-		long error = (long) (time2 - time1) * 1000 / sysTimestampFreq() - ms;
-		if (error >= -histogramSize / 2 && error <= histogramSize / 2)
-			histogram[error + histogramSize / 2]++;
+		double measured = (double) (time2 - time1) * 1000 / sysTimestampFreq();
+		double error = (measured - ms/1l)*1000;
+		if ((int)error >= -histogramSize / 2 && (int)error <= histogramSize / 2)
+			histogram[(int)error + histogramSize / 2]++;
 		printf("\rProgress %.2f%%", (float) i / numExp * 100);
 	}
 	
