@@ -1,20 +1,46 @@
+/*
+ * tasks.h
+ * Header to define generator tasks.
+ * 
+ * Periodic Tasks:
+ *  - taskDirectionGen;
+ *  - taskMovementGen;
+ *  - taskPhotographGen;
+ *  - taskGeologicalSampleGen;
+ *  - taskAtmosphericGen;
+ *  - taskAltitudeGen;
+ *  - taskTemperatureGen;
+ *  - taskSandStormGen;
+ * 
+ * Sporadic Task:
+ *  - spawnSatelliteTask();
+ * 
+ * @Author: AngeloDamante, KevinMaggi
+ * @mail: angelo.damante16@gmail.com, kevin.maggi@stud.unifi.it
+ * @Github: https://github.com/AngeloDamante, https://github.com/KevinMaggi
+*/
+
+/* includes */
 #include "taskset.h"
 #include "utility/utils.h"
 #include "utility/log.h"
 
+
 void spawnSatelliteTask()
 {
-    // boost
+    /// Boost
     taskPrioritySet(taskIdSelf(), 0);
 
-    // affinity
+    /// Affinity to CPU single core
     cpuset_t affinity;
     CPUSET_ZERO(affinity);
     CPUSET_SET(affinity, 1);
     taskCpuAffinitySet(taskIdSelf(), affinity);
 
-    // spawn
+    /// Spawn
     taskSatellite = taskSpawn("Satellite", (int)P1, 0, 4000, (FUNCPTR)jobSatellite, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    
+    /// Record log
     logEvent(logs, "t_1r");
 }
 
@@ -30,7 +56,8 @@ void generatorDirectionTask()
 
 void generatorMovementTask()
 {
-    taskDelay(msToTick(PHASE));
+    /// Offset
+    taskDelay(msToTick(PHASE)); 
     logEvent(logs, "t_3o");
     while (true)
     {

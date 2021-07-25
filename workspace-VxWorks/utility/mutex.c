@@ -1,3 +1,4 @@
+/* includes */
 #include "mutex.h"
 
 /* newMutex(): creates and returns a mutex */

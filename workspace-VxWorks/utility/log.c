@@ -1,5 +1,5 @@
+/* includes */
 #include "log.h"
-
 #include <usrLib.h>
 #include <stdio.h>
 #include <string.h>

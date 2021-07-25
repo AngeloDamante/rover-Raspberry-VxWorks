@@ -1,15 +1,16 @@
+/* includes */
 #include "entrypoints.h"
 
 int transmitData()
 {
-    // Turn ON Sensor
+    /// Turn ON Sensor
     pinMode(ANTENNA, OUT);
     gpioWrite(ANTENNA, HIGH);
 
-    // Computation
+    /// Computation
     busySleep(executionTime(C11_BCET, C11_WCET));
 
-    // Turn OFF Sensor
+    /// Turn OFF Sensor
     gpioWrite(ANTENNA, LOW);
 
     return 0;
@@ -17,7 +18,7 @@ int transmitData()
 
 int loadPositions()
 {
-    // Computation
+    /// Computation
     busySleep(executionTime(C21_BCET, C21_WCET));
 
     return 0;
@@ -25,7 +26,7 @@ int loadPositions()
 
 int computeDest()
 {
-    // Computation
+    /// Computation
     busySleep(executionTime(C22_BCET, C22_WCET));
 
     return 0;
@@ -33,19 +34,23 @@ int computeDest()
 
 int receiveCmd()
 {
-    // Computation
+    /// Computation
     busySleep(executionTime(C31_BCET, C31_WCET));
 
     return 0;
 }
 
+/*
+ * move() chunk reads @mission structure position 
+ * with @ack global variable.
+*/
 int move()
 {
-    // Turn ON Sensor
+    /// Turn ON Sensor
     pinMode(MOTORS, OUT);
     gpioWrite(MOTORS, HIGH);
 
-    // Computation Mission
+    /// Computation Mission
     if (ack < len_mission)
     {
 
@@ -84,16 +89,13 @@ int move()
             break;
         }
         ack++;
-    } else{
+    }
+    else
+    {
         busySleep(executionTime(C32_BCET, C32_WCET));
     }
 
-    // right_rotate_vehicle();
-    // busySleep(450);
-    // forward_vehicle();
-    // busySleep(400);
-
-    // Turn OFF Sensor
+    /// Turn OFF Sensor
     stop_vehicle();
     gpioWrite(MOTORS, LOW);
 
@@ -102,14 +104,14 @@ int move()
 
 int takePhoto()
 {
-    // Turn ON Sensor
+    /// Turn ON Sensor
     pinMode(CAMERA, OUT);
     gpioWrite(CAMERA, HIGH);
 
-    // Computation
+    /// Computation
     busySleep(executionTime(C41_BCET, C41_WCET));
 
-    // Turn OFF Sensor
+    /// Turn OFF Sensor
     gpioWrite(CAMERA, LOW);
 
     return 0;
@@ -117,14 +119,14 @@ int takePhoto()
 
 int drill()
 {
-    // Turn ON Sensor
+    /// Turn ON Sensor
     pinMode(DRILL, OUT);
     gpioWrite(DRILL, HIGH);
 
-    // Computation
+    /// Computation
     busySleep(executionTime(C51_BCET, C51_WCET));
 
-    // Turn OFF Sensor
+    /// Turn OFF Sensor
     gpioWrite(DRILL, LOW);
 
     return 0;
@@ -132,14 +134,14 @@ int drill()
 
 int collect()
 {
-    // Turn ON Sensor
+    /// Turn ON Sensor
     pinMode(ROB_ARM, OUT);
     gpioWrite(ROB_ARM, HIGH);
 
-    // Computation
+    /// Computation
     busySleep(executionTime(C52_BCET, C52_WCET));
 
-    // Turn OFF Sensor
+    /// Turn OFF Sensor
     gpioWrite(ROB_ARM, LOW);
 
     return 0;
@@ -147,14 +149,14 @@ int collect()
 
 int recordPress()
 {
-    // Turn ON Sensor
+    /// Turn ON Sensor
     pinMode(PRESS_SENS, OUT);
     gpioWrite(PRESS_SENS, HIGH);
 
-    // Computation
+    /// Computation
     busySleep(executionTime(C61_BCET, C61_WCET));
 
-    // Turn OFF Sensor
+    /// Turn OFF Sensor
     gpioWrite(PRESS_SENS, LOW);
 
     return 0;
@@ -162,7 +164,7 @@ int recordPress()
 
 int recordAltitude()
 {
-    // COmputation
+    /// Computation
     busySleep(executionTime(C71_BCET, C71_WCET));
 
     return 0;
@@ -170,14 +172,14 @@ int recordAltitude()
 
 int recordTemp()
 {
-    // Turn ON Sensor
+    /// Turn ON Sensor
     pinMode(TEMP_SENS, OUT);
     gpioWrite(TEMP_SENS, HIGH);
 
-    // Computation
+    /// Computation
     busySleep(executionTime(C81_BCET, C81_WCET));
 
-    // Turn OFF Sensor
+    /// Turn OFF Sensor
     gpioWrite(TEMP_SENS, LOW);
 
     return 0;
@@ -185,14 +187,14 @@ int recordTemp()
 
 int recordStorm()
 {
-    // Turn ON Sensor
+    /// Turn ON Sensor
     pinMode(STORM_SENS, OUT);
     gpioWrite(STORM_SENS, HIGH);
 
-    // Computation
+    /// Computation
     busySleep(executionTime(C91_BCET, C91_WCET));
 
-    // Turn OFF Sensor
+    /// Turn OFF Sensor
     gpioWrite(STORM_SENS, LOW);
 
     return 0;

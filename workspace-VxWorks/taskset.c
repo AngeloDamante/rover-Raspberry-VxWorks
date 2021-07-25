@@ -1,47 +1,48 @@
+/* includes */
 #include "taskset.h"
 
 int jobSatellite()
 {
-    // C11
+    /// C11
     transmitData();
     logEvent(logs, "t_11e");
 
-    // End Job
+    /// End Job
     taskDelete(taskIdSelf());
     return 0;
 }
 
 int jobDirection()
 {
-    // C21
+    /// C21
     loadPositions();
     logEvent(logs, "t_21e");
 
-    // C22
+    /// C22
     computeDest();
     logEvent(logs, "t_22e");
     
-    // Send
+    /// Send
     char *msg = "Direction_send_msg";
     msgQSend(prs, msg, 25, WAIT_FOREVER, MSG_PRI_NORMAL);
 
-    // End Job
+    /// End Job
     taskDelete(taskIdSelf());
     return 0;
 }
 
 int jobMovement()
 {
-    // Receive
+    /// Receive
     char *msg = (char *)malloc(25 * sizeof(char));
     msgQReceive(prs, msg, 25, WAIT_FOREVER);
     logEvent(logs, "t_31g");
     
-    // C31
+    /// C31
     receiveCmd();
     logEvent(logs, "t_31e");
 
-    // C32 -> Critical Section
+    /// C32 -> Critical Section
     semTake(mov->sem, WAIT_FOREVER);
     logEvent(logs, "t_32w");
     
@@ -55,14 +56,14 @@ int jobMovement()
     
     gpioWrite(MUTEX, LOW);
 
-    // End Job
+    /// End Job
     taskDelete(taskIdSelf());
     return 0;
 }
 
 int jobPhotograph()
 {
-    // C41 -> Critical Section
+    /// C41 -> Critical Section
     semTake(mov->sem, WAIT_FOREVER);
     logEvent(logs, "t_41w");
     
@@ -76,18 +77,18 @@ int jobPhotograph()
     
     gpioWrite(MUTEX, LOW);
 
-    // End Job
+    /// End Job
     taskDelete(taskIdSelf());
     return 0;
 }
 
 int jobGeologicalSample()
 {
-    // boost
+    /// boost
     taskPrioritySet(taskIdSelf(), mov->ceiling);
     logEvent(logs, "t_51b");
 
-    // Critical Section
+    /// Critical Section
     semTake(mov->sem, WAIT_FOREVER);
     logEvent(logs, "t_51w");
     
@@ -104,62 +105,58 @@ int jobGeologicalSample()
     
     gpioWrite(MUTEX, LOW);
 
-    // deboost
+    /// deboost
     taskPrioritySet(taskIdSelf(), P5);
 
-    // End Job
+    /// End Job
     taskDelete(taskIdSelf());
     return 0;
 }
 
 int jobAtmosphericPressure()
 {
-    // C61
+    /// C61
     recordPress();
     logEvent(logs, "t_61e");
     
-    // Send
+    /// Send
     long prs = 8000; // pressure on Mars
-    //printf("msgSend! \n");
     msgQSend(cmd, (char*)&prs, 8, WAIT_FOREVER, MSG_PRI_NORMAL);
 
-    // End Job
+    /// End Job
     taskDelete(taskIdSelf());
     return 0;
 }
 
 int jobAltitudeRecord(long prs)
 {
-	// Receive
-    //printf("msgReceived! \n");
-	
-    // C71
+    /// C71
     recordAltitude();
     logEvent(logs, "t_71e");
 
-    // End Job
+    /// End Job
     taskDelete(taskIdSelf());
     return 0;
 }
 
 int jobTemperatureRecord()
 {
-    // C81
+    /// C81
     recordTemp();
     logEvent(logs, "t_81e");
 
-    // End Job
+    /// End Job
     taskDelete(taskIdSelf());
     return 0;
 }
 
 int jobSandStormDetection()
 {
-    // C91
+    /// C91
     recordStorm();
     logEvent(logs, "t_91e");
 
-    // End Job
+    /// End Job
     taskDelete(taskIdSelf());
     return 0;
 }

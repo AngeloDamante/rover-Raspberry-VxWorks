@@ -1,19 +1,29 @@
-/* includes */
+/*
+ * MOTORS_time_test.c
+ * Downloadable Kernel Module to test timings for 4 DC motors and l298n shield.
+ * 
+ * - default_mission tests timing for default mission.
+ * - test_motors tests timing for complete mission.
+ * 
+ * @Author: AngeloDamante, KevinMaggi
+ * @mail: angelo.damante16@gmail.com, kevin.maggi@stud.unifi.it
+ * @Github: https://github.com/AngeloDamante, https://github.com/KevinMaggi
+*/
 
+/* includes */
 #include "vxWorks.h"
 #include <stdio.h>
 #include <usrLib.h>
 #include <unistd.h>
 #include "utility/utils.h"
 #include "hwLib/l298n.h"
-
 #include "utility/busySleep.h"
 #include "mission.h"
 
 #define NUM_TESTS 1000000
 #define PIN_LED 23
 
-void start(void)
+void default_mission(void)
 {
 	UINT32 start = sysTimestampLock();
 
@@ -43,13 +53,10 @@ void start(void)
 	printf("time: %ld", ms);
 }
 
-void load_m()
+
+void test_motors(void)
 {
 	load_mission_file();
-}
-
-void test(void)
-{
 	init_motor_shield();
 
 	UINT32 start = sysTimestampLock();

@@ -1,3 +1,18 @@
+/*
+ * tasksetSpec.h
+ * Header to define taskset specifics.
+ * 
+ * - Ti: Period of i-task.
+ * - Pi: Priority of i-task.
+ * - Cix_BCET: Best Computation Execution Time of chunk x of i-task.
+ * - Cix_WCET: Worst Computation Execution Time of chunk x of i-task.
+ * - PHASE: offset.
+ * 
+ * @Author: AngeloDamante, KevinMaggi
+ * @mail: angelo.damante16@gmail.com, kevin.maggi@stud.unifi.it
+ * @Github: https://github.com/AngeloDamante, https://github.com/KevinMaggi
+*/
+
 #ifndef TASKSET_SPEC_H
 #define TASKSET_SPEC_H
 

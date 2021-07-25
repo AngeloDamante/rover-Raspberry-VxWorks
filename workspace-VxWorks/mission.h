@@ -1,15 +1,30 @@
+/*
+ * mission.h
+ * Header to define mission directives and load file function.
+ * 
+ * Global mission structures:
+ *  - mission(int*): structure to store the directives read from the mission.txt file.
+ *  - len_mission(int): global variable to store number of lines of mission.txt file.
+ *  - ack(int): global index to sign actual mission directive. 
+ * 
+ * @Author: AngeloDamante, KevinMaggi
+ * @mail: angelo.damante16@gmail.com, kevin.maggi@stud.unifi.it
+ * @Github: https://github.com/AngeloDamante, https://github.com/KevinMaggi
+*/
+
 #ifndef MISSION_H
 #define MISSION_H
 
+/* includes */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "vxWorks.h"
 #include <usrLib.h>
 #include "utility/utils.h"
 
-enum options
+/// @type move_directive: collect of mission directives
+enum move_directive
 {
     FORWARD,
     BACKWARD,
@@ -18,63 +33,16 @@ enum options
     STOP
 };
 
+/// Global mission structures
 int *mission;
 int len_mission;
 int ack;
 
+/// Global file structures
 FILE *filePointer, *fptr;
 char buffer[255];
 
+/// Function to load file defined by user
 void load_mission_file();
-
-// void load_mission()
-// {
-//     FILE *filePointer, *fptr;
-//     int bufferLength = 255;
-//     char buffer[bufferLength];
-
-//     // counting
-//     fptr = fopen("mission.txt", "r");
-//     int len = 0;
-//     while (fgets(buffer, bufferLength, fptr))
-//     {
-//         len++;
-//     }
-//     fclose(fptr);
-//     printf("%d\n", len);
-
-//     // load mission
-//     filePointer = fopen("foo.txt", "r");
-//     int i = 0;
-//     mission = (int*)malloc(sizeof(int)*len);
-//     while (fgets(buffer, bufferLength, filePointer))
-//     {
-//         // printf("%s\n", buffer);
-//         if (strcmp(buffer, "FORWARD\n") == 0)
-//         {
-//             mission[i] = FORWARD;
-//         }
-//         if (strcmp(buffer, "BACKWARD\n") == 0)
-//         {
-//             mission[i] = BACKWARD;
-//         }
-//         if (strcmp(buffer, "RIGHT_ROTATE\n") == 0)
-//         {
-//             mission[i] = RIGHT_ROTATE;
-//         }
-//         if (strcmp(buffer, "LEFT_ROTATE\n") == 0)
-//         {
-//             mission[i] = LEFT_ROTATE;
-//         }
-//         if (strcmp(buffer, "STOP") == 0)
-//         {
-//             mission[i] = STOP;
-//         }
-
-//         i++;
-//     }
-
-//     fclose(filePointer);
-// }
 
 #endif /* MISSION_H */

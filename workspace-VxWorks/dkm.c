@@ -1,6 +1,18 @@
-#include "tasks.h"
-#include "taskset.h"
+/*
+ * dkm.c
+ * Downloadable Kernel Module of Resilience Rover.
+ * 
+ * Session: sp start() -> sp stop() in C-shell on VxWorks.
+ * 
+ * @Author: AngeloDamante, KevinMaggi
+ * @mail: angelo.damante16@gmail.com, kevin.maggi@stud.unifi.it
+ * @Github: https://github.com/AngeloDamante, https://github.com/KevinMaggi
+*/
 
+/* includes */
+#include "tasks.h"
+
+/// Name of Generators Task
 TASK_ID taskDirectionGen;
 TASK_ID taskMovementGen;
 TASK_ID taskPhotographGen;
@@ -12,29 +24,30 @@ TASK_ID taskSandStormGen;
 
 void start(void)
 {
-    /* Preparing to Mission */
+    /// Preparing to Mission
     load_mission_file();
     init_motor_shield();
 
-    /* Handle CPU */
+    /// CPU single core
     cpuset_t affinity;
     CPUSET_ZERO(affinity);
     CPUSET_SET(affinity, 1);
     taskCpuAffinitySet(taskIdSelf(), affinity);
 
-    /* Semaphore */
+    /// Semaphore
     mov = newMutex();
     updateCeiling(mov, P3);
     updateCeiling(mov, P4);
     updateCeiling(mov, P5);
 
-    /* Mailbox */
+    /// Mailbox
     cmd = msgQCreate(1, 25, MSG_Q_FIFO);
     prs = msgQCreate(1, 25, MSG_Q_FIFO);
 
+    /// Log
     logs = initLogger();
-    
-    /* Spawn */
+
+    /// Spawn generator tasks
     taskDirectionGen = taskSpawn("generatorTaskDirection", 0, 0, 4000, (FUNCPTR)generatorDirectionTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     taskMovementGen = taskSpawn("generatorTaskMovement", 0, 0, 4000, (FUNCPTR)generatorMovementTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     taskPhotographGen = taskSpawn("generatorTaskPhotograph", 0, 0, 4000, (FUNCPTR)generatorPhotographTask, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -47,7 +60,7 @@ void start(void)
 
 void stop(void)
 {
-    /*** Stop Generators ***/
+    /// Stop Generators
     taskDelete(taskDirectionGen);
     taskDelete(taskMovementGen);
     taskDelete(taskPhotographGen);
@@ -57,7 +70,7 @@ void stop(void)
     taskDelete(taskTemperatureGen);
     taskDelete(taskSandStormGen);
 
-    /*** Stop Jobs ***/
+    /// Stop Jobs
     if (taskSatellite != NULL)
     {
         taskDelete(taskSatellite);
@@ -103,13 +116,15 @@ void stop(void)
         taskDelete(taskSandStormDetection);
     }
 
+    /// Semaphore
     semDelete(mov->sem);
     free(mov);
 
+    /// Mailbox
     msgQDelete(cmd);
     msgQDelete(prs);
 
-    /* Free BUS */
+    /// Free GPIO bus
     gpioFree(ANTENNA);
     gpioFree(MOTORS);
     gpioFree(CAMERA);
@@ -120,5 +135,6 @@ void stop(void)
     gpioFree(STORM_SENS);
     free_bus_vehicle();
 
+    /// End log
     saveLog(logs, "RTAI_log.txt");
 }

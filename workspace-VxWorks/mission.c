@@ -1,15 +1,12 @@
+/* includes */
 #include "mission.h"
 
 void load_mission_file()
 {
+    /// First ack
     ack = 0;
-    // UINT32 start = sysTimestampLock();
 
-    // FILE *filePointer, *fptr;
-    // int bufferLength = 255;
-    // char buffer[bufferLength];
-
-    // counting
+    /// Lines counting
     fptr = fopen("mission.txt", "r");
     len_mission = 0;
     while (fgets(buffer, 255, fptr))
@@ -18,7 +15,7 @@ void load_mission_file()
     }
     fclose(fptr);
 
-    // load mission
+    /// Store in mission structure
     filePointer = fopen("mission.txt", "r");
     int i = 0;
     mission = (int *)malloc(sizeof(int) * len_mission);
@@ -54,9 +51,4 @@ void load_mission_file()
     }
 
     fclose(filePointer);
-
-    // UINT32 end = sysTimestampLock();
-
-	// long ms = intervalToMs(start, end);
-	// printf("time: %ld", ms);
 }

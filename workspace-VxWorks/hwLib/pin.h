@@ -1,3 +1,12 @@
+/*
+ * pin.h
+ * Header to define pin to pin associations among l298n and Raspberry Pi 3B+. 
+ * 
+ * @Author: AngeloDamante, KevinMaggi
+ * @mail: angelo.damante16@gmail.com, kevin.maggi@stud.unifi.it
+ * @Github: https://github.com/AngeloDamante, https://github.com/KevinMaggi
+*/
+
 #ifndef PIN_H
 #define PIN_H
 
