@@ -35,7 +35,7 @@ In this section there are all the functions implemented to develop code for the 
 ### hwLib 
 This directory contains the libraries to handle the GPIO bus. The sensors are simulated with LEDs and the motors are controlled with the l298n module.
 <p align="center">
-    <img src="../docs/hwLib.png" width=600 />
+    <img src="../docs/hwLib.png" />
 </p>
 
 ### utility
@@ -59,7 +59,7 @@ void busySleep(int ms);
 
 ### Main Toolchain
 <p align="center">
-    <img src="../docs/headers.png" width=600 />
+    <img src="../docs/headers.png" />
 </p>
 with:
 
@@ -91,5 +91,9 @@ sp stop                     // clear GPIO bus and delete all tasks
 
 ### Resilience in Action!
 <p align="center">
-    <img src="../docs/action.gif" width=400 />
+    <img src="../docs/action.gif" />
 </p>
+
+## Authors
+- <a href="https://github.com/AngeloDamante"> Angelo D'Amante </a>
+- <a href="https://github.com/KevinMaggi"> Kevin Maggi </a>

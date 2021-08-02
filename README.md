@@ -82,7 +82,7 @@ You can find SDK and development toolchain in that <a href="https://github.com/A
 
 ### GPIO bus connections
 <p align=center>
-    <img src="docs/GPIO.png" width=600 />
+    <img src="docs/GPIO.png" />
 </p>
 
 ## Authors

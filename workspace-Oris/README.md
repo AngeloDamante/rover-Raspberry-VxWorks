@@ -73,3 +73,7 @@ python3 traces_analyzer.py output_tau_2_t_c21_good.txt 5
 3. TraceExtractor for all task -> files with traces.
 4. Feasible Tester for each file with traces.
 5. Petri Simulator with RTAI_log.txt to verify correct execution.
+
+## Authors
+- <a href="https://github.com/AngeloDamante"> Angelo D'Amante </a>
+- <a href="https://github.com/KevinMaggi"> Kevin Maggi </a>
