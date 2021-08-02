@@ -66,7 +66,7 @@ def main():
     To start test for task with input file by trace extractor.
 
     Usage, (example)
-        python3 tester.py output_tau_2_t_c21_good.txt 5
+        python3 traces_analyzer.py output_tau_2_t_c21_good.txt 5
     with:
         sys.argv[0] = tester.py (not relevant)
         sys.argv[1] = output_tau_2_t_c21_good.txt (file_name.txt)
