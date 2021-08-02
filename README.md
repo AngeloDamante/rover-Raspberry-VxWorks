@@ -1,4 +1,4 @@
-# Resilience Rover
+# Resilience Rover with VxWorks and Oris
 The project for Software Engineering Embedded Systems exam consists of embedded software to develop a <i>"rover-like"</i> platform with Raspberry Pi 3B+ using VxWorks and Oris.
 ```
 ├── docs                    # images and documentation
@@ -11,6 +11,8 @@ The project for Software Engineering Embedded Systems exam consists of embedded 
     ├── README.md
     └── ...
 ```
+- The ```build``` is described in <a href=https://github.com/AngeloDamante/rover-Raspberry-VxWorks/tree/main/workspace-VxWorks> workspace-VxWorks</a>. 
+- The ```PTPN``` is described in <a href=https://github.com/AngeloDamante/rover-Raspberry-VxWorks/tree/main/workspace-Oris> workspace-Oris </a>.
 
 ## Project Workflow
 The workflow followed goes from the design of the taskset to its implementation.
